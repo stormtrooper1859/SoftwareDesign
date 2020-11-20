@@ -13,7 +13,7 @@ import ru.akirakozov.sd.refactoring.servlet.QueryServlet;
  */
 public class Main {
     public static void main(String[] args) throws Exception {
-        DBManager dbManager = new DBManager();
+        DBManager dbManager = new DBManager("jdbc:sqlite:test.db");
         dbManager.createTableIfNotExist();
 
         Server server = new Server(8081);
