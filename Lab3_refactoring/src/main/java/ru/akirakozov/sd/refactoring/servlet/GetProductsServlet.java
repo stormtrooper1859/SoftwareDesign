@@ -1,27 +1,29 @@
 package ru.akirakozov.sd.refactoring.servlet;
 
+import ru.akirakozov.sd.refactoring.Product;
 import ru.akirakozov.sd.refactoring.db.DBManager;
+import ru.akirakozov.sd.refactoring.utils.HTMLBuilder;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class GetProductsServlet extends HttpServlet {
+public class GetProductsServlet extends AbstractServlet {
+
+    public GetProductsServlet(DBManager dbManager) {
+        super(dbManager);
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.getWriter().println("<html><body>");
+        List<Product> allProducts = dbManager.getAllProducts();
 
-        DBManager dbManager = new DBManager();
-        List<String> allProducts = dbManager.getAllProducts();
+        HTMLBuilder htmlBuilder = new HTMLBuilder();
 
-        for (String s : allProducts) {
-            response.getWriter().println(s);
-        }
+        htmlBuilder.addProductTable(allProducts);
 
-        response.getWriter().println("</body></html>");
+        response.getWriter().println(htmlBuilder.build());
 
         response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);

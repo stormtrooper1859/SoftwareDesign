@@ -1,5 +1,7 @@
 package ru.akirakozov.sd.refactoring.db;
 
+import ru.akirakozov.sd.refactoring.Product;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +35,8 @@ public class DBManager {
         }
     }
 
-    public List<String> getAllProducts() {
-        List<String> result = new ArrayList<>();
+    public List<Product> getAllProducts() {
+        List<Product> result = new ArrayList<>();
 
         try {
             try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db")) {
@@ -44,7 +46,7 @@ public class DBManager {
                 while (rs.next()) {
                     String name = rs.getString("name");
                     int price = rs.getInt("price");
-                    result.add(name + "\t" + price + "</br>");
+                    result.add(new Product(name, price));
                 }
 
                 rs.close();
@@ -58,8 +60,8 @@ public class DBManager {
         return result;
     }
 
-    public List<String> getMostExpensiveProduct() {
-        List<String> result = new ArrayList<>();
+    public List<Product> getMostExpensiveProduct() {
+        List<Product> result = new ArrayList<>();
 
         try {
             try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db")) {
@@ -69,7 +71,7 @@ public class DBManager {
                 while (rs.next()) {
                     String name = rs.getString("name");
                     int price = rs.getInt("price");
-                    result.add(name + "\t" + price + "</br>");
+                    result.add(new Product(name, price));
                 }
 
                 rs.close();
@@ -83,8 +85,8 @@ public class DBManager {
         return result;
     }
 
-    public List<String> getCheapestProduct() {
-        List<String> result = new ArrayList<>();
+    public List<Product> getCheapestProduct() {
+        List<Product> result = new ArrayList<>();
 
         try {
             try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db")) {
@@ -94,7 +96,7 @@ public class DBManager {
                 while (rs.next()) {
                     String name = rs.getString("name");
                     int price = rs.getInt("price");
-                    result.add(name + "\t" + price + "</br>");
+                    result.add(new Product(name, price));
                 }
 
                 rs.close();
