@@ -111,8 +111,7 @@ public class APIIntegrationTest {
         serverThread = new Thread(() -> {
             try {
                 Main.main(null);
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ignored) {
             }
         });
         serverThread.start();
