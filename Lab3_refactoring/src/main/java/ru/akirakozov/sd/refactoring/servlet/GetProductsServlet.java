@@ -5,8 +5,6 @@ import ru.akirakozov.sd.refactoring.db.DBManager;
 import ru.akirakozov.sd.refactoring.utils.HTMLBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 public class GetProductsServlet extends AbstractServlet {
@@ -16,16 +14,9 @@ public class GetProductsServlet extends AbstractServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doSuccessfulGet(HttpServletRequest request, HTMLBuilder responseBuilder) {
         List<Product> allProducts = dbManager.getAllProducts();
 
-        HTMLBuilder htmlBuilder = new HTMLBuilder();
-
-        htmlBuilder.addProductTable(allProducts);
-
-        response.getWriter().println(htmlBuilder.build());
-
-        response.setContentType("text/html");
-        response.setStatus(HttpServletResponse.SC_OK);
+        responseBuilder.addProductTable(allProducts);
     }
 }

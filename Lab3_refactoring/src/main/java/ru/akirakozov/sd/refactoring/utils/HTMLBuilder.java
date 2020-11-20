@@ -5,17 +5,22 @@ import ru.akirakozov.sd.refactoring.Product;
 import java.util.List;
 
 public class HTMLBuilder {
+    private static final String HTML_BEGINNING = "<html><body>";
+    private static final String HTML_ENDING = "</body></html>";
     StringBuilder text;
     boolean isDirectText = false;
     boolean alreadyBuild = false;
-    private static final String HTML_BEGINNING = "<html><body>";
-    private static final String HTML_ENDING = "</body></html>";
 
     public HTMLBuilder() {
         text = new StringBuilder(HTML_BEGINNING);
     }
 
     public HTMLBuilder addText(String s) {
+        text.append(s);
+        return this;
+    }
+
+    public HTMLBuilder addNumber(Number s) {
         text.append(s);
         return this;
     }

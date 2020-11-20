@@ -110,8 +110,8 @@ public class DBManager {
         return result;
     }
 
-    public List<Integer> getSumOfAllProducts() {
-        List<Integer> result = new ArrayList<>();
+    public Integer getSumOfAllProducts() {
+        Integer result = null;
 
         try {
             try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db")) {
@@ -119,7 +119,7 @@ public class DBManager {
                 ResultSet rs = stmt.executeQuery("SELECT SUM(price) FROM PRODUCT");
 
                 if (rs.next()) {
-                    result.add(rs.getInt(1));
+                    result = rs.getInt(1);
                 }
 
                 rs.close();
@@ -133,8 +133,8 @@ public class DBManager {
         return result;
     }
 
-    public List<Integer> getProductNumber() {
-        List<Integer> result = new ArrayList<>();
+    public Integer getProductNumber() {
+        Integer result = null;
 
         try {
             try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db")) {
@@ -142,7 +142,7 @@ public class DBManager {
                 ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM PRODUCT");
 
                 if (rs.next()) {
-                    result.add(rs.getInt(1));
+                    result = rs.getInt(1);
                 }
 
                 rs.close();
