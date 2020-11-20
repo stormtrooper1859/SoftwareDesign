@@ -63,6 +63,9 @@ public class APIIntegrationTest {
 
         String response9 = makeRequest("query", "command=sum");
         assertEquals("<html><body>Summary price: 900</body></html>", response9);
+
+        String response10 = makeRequest("query", "command=average");
+        assertEquals("Unknown command: average", response10);
     }
 
     private String makeRequest(String method, String args) {
