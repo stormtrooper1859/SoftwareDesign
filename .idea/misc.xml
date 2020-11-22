@@ -4,6 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/Lab1" />
     <file type="web" url="file://$PROJECT_DIR$/Lab2_mock" />
+    <file type="web" url="file://$PROJECT_DIR$/Lab4_mvc_2" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
