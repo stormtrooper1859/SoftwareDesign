@@ -1,1 +1,10 @@
-<h1>Hello</h1>
+<h1>TODO Lists</h1>
+<ul>
+    {{#each lists}}
+        <li><a href="/lists/{{this}}">{{this}}</a></li>
+    {{/each}}
+</ul>
+<input id="text1"></input>
+<button id="btn1">press me</button>
+
+<script src="scripts/script.js"></script>
