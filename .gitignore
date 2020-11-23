@@ -90,3 +90,8 @@ key.properties
 
 target/
 test.db
+
+Lab4_mvc/gradle
+Lab4_mvc/gradlew
+Lab4_mvc/gradlew.bat
+
