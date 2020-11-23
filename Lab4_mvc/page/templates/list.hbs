@@ -1,0 +1,45 @@
+<h1 class="page-title">{{name}}</h1>
+<div class="page-content">
+    <div class="page-content__left main-content">
+        <ul class="list">
+            {{#each items}}
+                <li class="list__item list-item">
+                    <div
+                        class="
+                            list-item__link
+                            {{#if this.marked}}
+                            list-item__marked
+                            {{/if}}
+                        "
+                        data-marked="{{this.marked}}"
+                        data-id="{{this.id}}"
+                        >
+                        {{this.data}}
+                    </div>
+                    <button
+                        class="list-item__remove"
+                        data-id="{{this.id}}">
+                        remove
+                    </button>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="page-content__right add-container">
+        <input
+            class="add-container__text" 
+            id="text_add">
+        </input>
+        <button
+            class="add-container__button"
+            id="button_add">
+            Add new item
+        </button>
+    </div>
+
+</div>
+<h3 class="backlink">
+    <a class="backlink__link" href="/">Back</a>
+</h3>
+
+<script src="/scripts/list.js"></script>
