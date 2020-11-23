@@ -1,27 +1,40 @@
 import express from 'express'
-import { ITODOList, TODOList } from '../model/TODOList'
+import { TodoListHandler } from '../model'
 import { storageToIndex } from '../mappings/storageToIndex'
 
-const get_routes = (todo_list: TODOList) => {
+const get_routes = (todo_list: TodoListHandler) => {
 
     const router = express.Router();
 
-    router.get('/', (req, res, next) => {
-        res.render('index', storageToIndex(todo_list));
+    router.get('/', async (req, res, next) => {    
+        res.render('index', await storageToIndex(todo_list));
     })
 
-    router.post('/add', (req, res, next) => {
-        const listName = req.body.name;
-        todo_list.createList(listName)
-
-        res.send('OK')
+    router.post('/add', async (req, res, next) => {
+        try {
+            const listName = req.body.name;
+            await todo_list.createList(listName)
+    
+            res.send('OK')
+        } catch(e) {
+            console.error(e)
+        }
     })
 
-    router.delete('/remove', (req, res, next) => {
-        const listName = req.body.name;
-        todo_list.removeList(listName)
+    router.delete('/remove', async (req, res, next) => {
+        
+        try {
+            const listName = req.body.name;
+            await todo_list.removeList(listName)
+    
+            res.send('OK')
+        } catch(e) {
+            console.error(e)
+        }
+        // const listName = req.body.name;
+        // todo_list.removeList(listName)
 
-        res.send('OK')
+        // res.send('OK')
     })
 
     // router.get('/remove', (req, res, next) => {

@@ -1,35 +1,29 @@
-const url = "/add"
-const response = (data) => fetch(url, {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'same-origin', // include, *same-origin, omit
-    headers: {
-      'Content-Type': 'application/json'
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    redirect: 'follow', // manual, *follow, error
-    referrerPolicy: 'no-referrer', // no-referrer, *client
-    body: JSON.stringify(data) // body data type must match "Content-Type" header
-});
-
-// response({"number": 1})
-
-
-const textField = document.getElementById('text1');
-const button = document.getElementById('btn1');
+const textField = document.getElementById('text2');
+const button = document.getElementById('btn2');
 
 
 const fn = () => {
     const data = {
-        name: textField.value
+        text: textField.value
     }
 
-    console.log(data)
+    // console.log(data)
 
     // const url2 = url + '?name=' + data.name
 
-    fetch(url, {
+    // let xhr = new XMLHttpRequest();
+
+    // xhr.open('POST', "./add");
+
+    // xhr.send([JSON.stringify(data)]);
+
+    // xhr.onload = function() {
+    //     console.log('smth')
+    // };
+
+    const url = document.location.href;
+
+    fetch(url + "/add", {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

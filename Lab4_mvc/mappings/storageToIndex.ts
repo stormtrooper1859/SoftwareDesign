@@ -1,8 +1,22 @@
-import { TODOList } from '../model/TODOList'
+import { TodoListHandler } from '../model'
 
-export const storageToIndex = (store: TODOList) => {
+interface IndexData {
+    lists: {
+        id: string,
+        name: string,
+    }[]
+}
+
+interface ListsData {
+    name: string;
+    items: string[]
+}
+
+export async function storageToIndex(store: TodoListHandler): Promise<IndexData> {
+    const t = await store.getAllLists();
+    store.getAllLists().then(console.log)
     const res =  {
-        lists: Array.from(store.storage.lists.keys())
+        lists: t
     }
 
     console.log('storageToIndex', res)
@@ -10,10 +24,12 @@ export const storageToIndex = (store: TODOList) => {
     return res;
 }
 
-export const storageToList = (store: TODOList, listName: string) => {
+export async function storageToList(store: TodoListHandler, listId: string): Promise<ListsData> {
+    const t = await store.getItemsOfList(listId);
+    const t2 = await store.getListNameById(listId);
     const res =  {
-        name: listName,
-        items: Array.from(store.storage.lists.get(listName))
+        name: t2,
+        items: t
     }
 
     console.log('storageToList', res)
