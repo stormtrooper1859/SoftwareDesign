@@ -12,7 +12,7 @@ class PrintVisitor : AbstractTokenVisitor<String>() {
         result.append(s)
     }
 
-    override fun visit(token: NumberToken) = append(token.value.toString())
+    override fun visit(token: NumberToken) = append("NUMBER(${token.value})")
 
     override fun visit(token: PlusToken) = append("PLUS")
 
