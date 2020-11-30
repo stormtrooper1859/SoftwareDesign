@@ -3,6 +3,7 @@ package tokenizer
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import visitor.PrintVisitor
+import java.lang.RuntimeException
 
 class TokenizerTest {
     @Test
@@ -17,5 +18,12 @@ class TokenizerTest {
         val printVisitor = PrintVisitor()
         tokens.iterate(printVisitor)
         assertEquals(expected, printVisitor.getResult())
+    }
+
+    @Test(expected = RuntimeException::class)
+    fun testUnexpectedSymbol() {
+        val expression = "  1,+(3+2)* 3452 - 6/6"
+        val tokenizer = Tokenizer(expression);
+        tokenizer.processInput()
     }
 }
