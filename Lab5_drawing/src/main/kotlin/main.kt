@@ -4,9 +4,11 @@ import graph.AdjacencyListGraph
 import graph.MatrixGraph
 
 fun main() {
-    testGraph()
-//    MatrixGraph(System.`in`).draw(JFrameDrawingAPI())
+//    testGraph()
+//    MatrixGraph(System.`in`).draw(JavaFXDrawingAPI())
+    MatrixGraph(System.`in`).draw(JFrameDrawingAPI())
 //    AdjacencyListGraph(System.`in`).draw(JavaFXDrawingAPI())
+//    AdjacencyListGraph(System.`in`).draw(JFrameDrawingAPI())
 }
 
 fun testGraph() {
