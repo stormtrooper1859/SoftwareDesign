@@ -1,13 +1,14 @@
-import program.Fibonacci;
+import program.MemoizedRecursiveFibonacci;
+import program.RecursiveFibonacci;
 
 public class Main {
 
     public static void main(String[] args) {
         int x = 45;
 
-        int recFib29 = Fibonacci.recursiveFibonacci(x);
+        long recFib29 = new RecursiveFibonacci().calculate(x);
         System.out.println("Fibonacci of " + x + " (recursive): " + recFib29);
-        int memFib29 = Fibonacci.memoizedRecursiveFibonacci(x);
+        long memFib29 = new MemoizedRecursiveFibonacci().calculate(x);
         System.out.println("Fibonacci of " + x + " (memoized): " + memFib29);
     }
 
