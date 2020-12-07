@@ -1,10 +1,9 @@
-import aspect.ExecutionTimeAspect;
+import aspect.PerformanceAspect;
 import aspect.ExecutionTreeAspect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import program.Fibonacci;
-import program.MemoizedRecursiveFibonacci;
 import program.RecursiveFibonacci;
 
 @Configuration
@@ -17,8 +16,8 @@ public class ContextConfiguration {
     }
 
     @Bean
-    public ExecutionTimeAspect aspectTime() {
-        return new ExecutionTimeAspect();
+    public PerformanceAspect aspectTime() {
+        return new PerformanceAspect();
     }
 
     @Bean

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PerformanceTimeLogger {
-    private static final PerformanceTimeLogger INSTANCE = new PerformanceTimeLogger();
+public class PerformanceLogger {
+    private static final PerformanceLogger INSTANCE = new PerformanceLogger();
     private Map<String, ArrayList<Long>> loggerMap = new HashMap<>();
     private boolean locked = false;
 
-    public static PerformanceTimeLogger getInstance() {
+    public static PerformanceLogger getInstance() {
         return INSTANCE;
     }
 

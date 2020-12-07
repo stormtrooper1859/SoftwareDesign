@@ -1,10 +1,12 @@
 package program;
 
-import aspect.Profile;
+import aspect.ExecutionTreeProfile;
+import aspect.PerformanceProfile;
 
 public class RecursiveFibonacci implements Fibonacci {
 
-    @Profile
+    @PerformanceProfile
+    @ExecutionTreeProfile
     public long calculate(Fibonacci it, int x) {
         if (x == 0) {
             return 0;

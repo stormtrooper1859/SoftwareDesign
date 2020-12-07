@@ -1,6 +1,7 @@
 package program;
 
-import aspect.Profile;
+import aspect.ExecutionTreeProfile;
+import aspect.PerformanceProfile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +9,8 @@ import java.util.Map;
 public class MemoizedRecursiveFibonacci implements Fibonacci {
     private final Map<Integer, Long> memory = new HashMap<>();
 
-    @Profile
+    @PerformanceProfile
+    @ExecutionTreeProfile
     public long calculate(Fibonacci it, int x) {
         if (x == 0) {
             return 0;

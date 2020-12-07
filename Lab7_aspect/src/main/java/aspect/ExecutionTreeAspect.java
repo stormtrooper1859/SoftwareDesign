@@ -8,16 +8,16 @@ import org.aspectj.lang.reflect.MethodSignature;
 @Aspect
 public class ExecutionTreeAspect {
 
-    @Around("@annotation(aspect.Profile) && execution(* *(..))")
+    @Around("@annotation(aspect.ExecutionTreeProfile) && execution(* *(..))")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
-        CallTreeLogger callTreeLogger = CallTreeLogger.getInstance();
+        ExecutionTreeLogger executionTreeLogger = ExecutionTreeLogger.getInstance();
 
         String methodName = ((MethodSignature) joinPoint.getSignature()).getMethod().toString();
-        callTreeLogger.enterMethod(methodName, joinPoint.getArgs());
+        executionTreeLogger.enterMethod(methodName, joinPoint.getArgs());
 
         Object result = joinPoint.proceed(joinPoint.getArgs());
 
-        callTreeLogger.leaveMethod();
+        executionTreeLogger.leaveMethod();
 
         return result;
     }

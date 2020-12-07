@@ -2,12 +2,12 @@ package aspect;
 
 import java.util.Arrays;
 
-public class CallTreeLogger {
-    private static final CallTreeLogger INSTANCE = new CallTreeLogger();
+public class ExecutionTreeLogger {
+    private static final ExecutionTreeLogger INSTANCE = new ExecutionTreeLogger();
     private StringBuilder sb = new StringBuilder();
     private int depth = 0;
 
-    public static CallTreeLogger getInstance() {
+    public static ExecutionTreeLogger getInstance() {
         return INSTANCE;
     }
 

@@ -6,12 +6,12 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 
 @Aspect
-public class ExecutionTimeAspect {
+public class PerformanceAspect {
 
-    @Around("@annotation(aspect.Profile) && execution(* *(..))")
+    @Around("@annotation(aspect.PerformanceProfile) && execution(* *(..))")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
-        PerformanceTimeLogger performanceTimeLogger = PerformanceTimeLogger.getInstance();
-        boolean shouldPullData = performanceTimeLogger.isFirstAndLock();
+        PerformanceLogger performanceLogger = PerformanceLogger.getInstance();
+        boolean shouldPullData = performanceLogger.isFirstAndLock();
         long startTime = System.nanoTime();
 
         Object result = joinPoint.proceed(joinPoint.getArgs());
@@ -19,10 +19,10 @@ public class ExecutionTimeAspect {
         long endTime = System.nanoTime();
 
         String methodName = ((MethodSignature) joinPoint.getSignature()).getMethod().toString();
-        performanceTimeLogger.writeRecord(methodName, endTime - startTime);
+        performanceLogger.writeRecord(methodName, endTime - startTime);
 
         if (shouldPullData) {
-            System.out.println(performanceTimeLogger.pullLog());
+            System.out.println(performanceLogger.pullLog());
         }
 
         return result;
