@@ -1,13 +1,17 @@
 package program;
 
-import java.util.HashMap;
-import java.util.Map;
+import aspect.Profile;
 
 public class RecursiveFibonacci implements Fibonacci {
-    public long calculate(int x) {
-        if (x == 0 || x == 1) {
+
+    @Profile
+    public long calculate(Fibonacci it, int x) {
+        if (x == 0) {
+            return 0;
+        }
+        if (x == 1) {
             return 1;
         }
-        return calculate(x - 1) + calculate(x - 2);
+        return it.calculate(it, x - 1) + it.calculate(it, x - 2);
     }
 }

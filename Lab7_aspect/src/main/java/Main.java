@@ -1,15 +1,16 @@
-import program.MemoizedRecursiveFibonacci;
-import program.RecursiveFibonacci;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import program.Fibonacci;
 
 public class Main {
 
     public static void main(String[] args) {
-        int x = 45;
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ContextConfiguration.class);
+        Fibonacci fibonacci = applicationContext.getBean(Fibonacci.class);
 
-        long recFib29 = new RecursiveFibonacci().calculate(x);
-        System.out.println("Fibonacci of " + x + " (recursive): " + recFib29);
-        long memFib29 = new MemoizedRecursiveFibonacci().calculate(x);
-        System.out.println("Fibonacci of " + x + " (memoized): " + memFib29);
+        int x = 13;
+
+        long fib = fibonacci.calculate(fibonacci, x);
+        System.out.println("Fibonacci of " + x + ": " + fib);
     }
-
 }

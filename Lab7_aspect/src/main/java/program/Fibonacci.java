@@ -1,5 +1,5 @@
 package program;
 
 public interface Fibonacci {
-    long calculate(int x);
+    long calculate(Fibonacci it, int x);
 }
