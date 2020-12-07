@@ -1,4 +1,5 @@
 import aspect.ExecutionTimeAspect;
+import aspect.ExecutionTreeAspect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -16,7 +17,12 @@ public class ContextConfiguration {
     }
 
     @Bean
-    public ExecutionTimeAspect aspect() {
+    public ExecutionTimeAspect aspectTime() {
         return new ExecutionTimeAspect();
+    }
+
+    @Bean
+    public ExecutionTreeAspect aspectTree() {
+        return new ExecutionTreeAspect();
     }
 }
