@@ -8,12 +8,8 @@ import java.net.MalformedURLException
 import java.net.URL
 
 
-/**
- * @author akirakozov
- */
 class URLReader : PageLoader {
     override fun load(sourceUrl: String): String {
-        println("WTF")
         val url = toUrl(sourceUrl)
         try {
             BufferedReader(InputStreamReader(url.openStream())).use { `in` ->
