@@ -2,7 +2,7 @@ package db
 
 import org.bson.Document
 
-data class User(val login: String, val name: String, val currency: Currency) : Documentable {
+data class User(val login: String, val name: String, val currency: Currency) : DocumentConvertible {
     constructor(doc: Document) : this(
         doc.getString("login"),
         doc.getString("name"),

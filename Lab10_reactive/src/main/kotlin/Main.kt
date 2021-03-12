@@ -15,7 +15,7 @@ fun main() {
 }
 
 
-fun getMongoDAO() : ServiceDAO {
+fun getMongoDAO(): ServiceDAO {
     val client = MongoClients.create("mongodb://localhost:27017")
     val db = client.getDatabase("reactive")
     return DBManager(db)

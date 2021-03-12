@@ -20,6 +20,10 @@ dependencies {
     implementation group: 'io.reactivex', name: 'rxnetty-http', version: '0.5.3'
     implementation group: 'io.reactivex', name: 'rxnetty-common', version: '0.5.3'
     implementation group: 'io.netty', name: 'netty-all', version: '4.1.59.Final'
+
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '3.6.0'
 }
 
 test {

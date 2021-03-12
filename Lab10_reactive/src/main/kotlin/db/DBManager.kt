@@ -2,6 +2,7 @@ package db
 
 import com.mongodb.client.model.Filters
 import com.mongodb.rx.client.MongoDatabase
+import com.mongodb.rx.client.Success
 import rx.Observable
 
 class DBManager(private val db: MongoDatabase) : ServiceDAO {
@@ -11,32 +12,21 @@ class DBManager(private val db: MongoDatabase) : ServiceDAO {
             .toObservable()
             .map(::User)
 
-    override fun getProductsForUser(user: User): Observable<Product> =
+    override fun getProducts(): Observable<Product> =
         db.getCollection("products")
             .find()
             .toObservable()
             .map(::Product)
-            .map {
-                Product(
-                    it.name,
-                    Currency.convertPrice(it.currency, user.currency, it.price),
-                    user.currency
-                )
-            }
 
-    override fun registerNewUser(user: User): Observable<Boolean> {
+    override fun registerNewUser(user: User): Observable<Success> {
         return db.getCollection("users")
             .insertOne(user.toDocument())
-            .map {
-                true
-            }
+            .asObservable()
     }
 
-    override fun addNewProduct(product: Product): Observable<Boolean> {
+    override fun addNewProduct(product: Product): Observable<Success> {
         return db.getCollection("products")
             .insertOne(product.toDocument())
-            .map {
-                true
-            }
+            .asObservable()
     }
 }

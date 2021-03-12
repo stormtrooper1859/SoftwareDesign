@@ -2,6 +2,6 @@ package db
 
 import org.bson.Document
 
-interface Documentable {
+interface DocumentConvertible {
     fun toDocument(): Document
 }

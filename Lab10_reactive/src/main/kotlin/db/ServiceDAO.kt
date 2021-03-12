@@ -1,13 +1,14 @@
 package db
 
+import com.mongodb.rx.client.Success
 import rx.Observable
 
 interface ServiceDAO {
-    fun getUserByLogin(login: String) : Observable<User>
+    fun getUserByLogin(login: String): Observable<User>
 
-    fun getProductsForUser(user: User): Observable<Product>
+    fun getProducts(): Observable<Product>
 
-    fun registerNewUser(user: User): Observable<Boolean>
+    fun registerNewUser(user: User): Observable<Success>
 
-    fun addNewProduct(product: Product): Observable<Boolean>
+    fun addNewProduct(product: Product): Observable<Success>
 }

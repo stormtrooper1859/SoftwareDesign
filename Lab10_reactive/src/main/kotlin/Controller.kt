@@ -10,19 +10,19 @@ class Controller(private val serviceDAO: ServiceDAO) {
             "/add_user" -> addUser(params)
             "/add_item" -> addItem(params)
             "/list_items" -> listItems(params)
-            else -> Observable.just("Not found")
+            else -> Observable.just("Command not found")
         }
     } catch (e: Exception) {
         Observable.just("An error has occurred during command processing")
     }
 
     private fun addUser(params: Map<String, List<String>>): Observable<String> {
-        val login = params["login"]?.get(0)
-        val name = params["name"]?.get(0) ?: ""
-        val currency = params["currency"]?.get(0)?.let { Currency.valueOf(it) }
+        val login = params.getParam("login")
+        val name = params.getParam("name")
+        val currency = params.getParam("login")?.let { Currency.valueOf(it) }
 
-        if (login == null || currency == null) {
-            return Observable.just("Nothing")
+        if (login == null || name == null || currency == null) {
+            return nothing()
         }
 
         val user = User(login, name, currency)
@@ -32,15 +32,12 @@ class Controller(private val serviceDAO: ServiceDAO) {
     }
 
     private fun addItem(params: Map<String, List<String>>): Observable<String> {
-        val user: Observable<User> = params["login"]?.get(0)?.let {
-            serviceDAO.getUserByLogin(it)
-        } ?: return Observable.just("Nothing")
+        val user = getUserByParams(params)
+        val name = params.getParam("name")
+        val price = params.getParam("price")?.toDouble()
 
-        val name = params["name"]?.get(0)
-        val price = params["price"]?.get(0)?.toDouble()
-
-        if (name == null || price == null) {
-            return Observable.just("Nothing")
+        if (user == null || name == null || price == null) {
+            return nothing()
         }
 
         return user.flatMap {
@@ -50,14 +47,24 @@ class Controller(private val serviceDAO: ServiceDAO) {
     }
 
     private fun listItems(params: Map<String, List<String>>): Observable<String> {
-        val user: Observable<User> = params["login"]?.get(0)?.let {
-            serviceDAO.getUserByLogin(it)
-        } ?: return Observable.just("Nothing")
+        val user = getUserByParams(params)
 
-        return user.flatMap {
-            serviceDAO.getProductsForUser(it)
-        }.map {
-            "${it.name} ${"%.2f".format(it.price)} ${it.currency}\n"
+        return user?.flatMap { _user ->
+            serviceDAO.getProducts()
+                .map {
+                    val userPrice = Currency.convertPrice(it.currency, _user.currency, it.price)
+                    "${it.name} ${"%.2f".format(userPrice)} ${_user.currency}\n"
+                }
+        } ?: nothing()
+    }
+
+    private fun getUserByParams(params: Map<String, List<String>>): Observable<User>? {
+        return params.getParam("login")?.let {
+            serviceDAO.getUserByLogin(it)
         }
     }
+
+    private fun nothing() = Observable.just("Nothing")
 }
+
+fun Map<String, List<String>>.getParam(name: String): String? = this[name]?.get(0)
