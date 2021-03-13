@@ -19,7 +19,7 @@ class Controller(private val serviceDAO: ServiceDAO) {
     private fun addUser(params: Map<String, List<String>>): Observable<String> {
         val login = params.getParam("login")
         val name = params.getParam("name")
-        val currency = params.getParam("login")?.let { Currency.valueOf(it) }
+        val currency = params.getParam("currency")?.let { Currency.valueOf(it) }
 
         if (login == null || name == null || currency == null) {
             return nothing()
@@ -32,7 +32,7 @@ class Controller(private val serviceDAO: ServiceDAO) {
     }
 
     private fun addItem(params: Map<String, List<String>>): Observable<String> {
-        val user = getUserByParams(params)
+        val user = getUserByLoginParam(params)
         val name = params.getParam("name")
         val price = params.getParam("price")?.toDouble()
 
@@ -47,7 +47,7 @@ class Controller(private val serviceDAO: ServiceDAO) {
     }
 
     private fun listItems(params: Map<String, List<String>>): Observable<String> {
-        val user = getUserByParams(params)
+        val user = getUserByLoginParam(params)
 
         return user?.flatMap { _user ->
             serviceDAO.getProducts()
@@ -58,7 +58,7 @@ class Controller(private val serviceDAO: ServiceDAO) {
         } ?: nothing()
     }
 
-    private fun getUserByParams(params: Map<String, List<String>>): Observable<User>? {
+    private fun getUserByLoginParam(params: Map<String, List<String>>): Observable<User>? {
         return params.getParam("login")?.let {
             serviceDAO.getUserByLogin(it)
         }

@@ -2,7 +2,11 @@ package db
 
 import org.bson.Document
 
-data class Product(val name: String, val price: Double, val currency: Currency) : DocumentConvertible {
+data class Product(
+    val name: String,
+    val price: Double,
+    val currency: Currency
+) : DocumentConvertible {
     constructor(doc: Document) : this(
         doc.getString("name"),
         doc.getDouble("price"),
